@@ -4,7 +4,7 @@
 "Chat with PDF" is a web application that allows users to interactively query and chat about the content of PDF documents. Utilizing advanced natural language processing (NLP) techniques and generative AI, this application makes it easy to extract insights from documents in a conversational manner.
 
 <p align="center">
-  <img height="500" width="auto" src="[http://some_place.com/image.png](https://github.com/Rishi-Sutar/Chat_with_PDF/blob/main/flowchart.jpeg?raw=true)" />
+  <img height="500" width="auto" src="http://some_place.com/image.png](https://github.com/Rishi-Sutar/Chat_with_PDF/blob/main/flowchart.jpeg?raw=true" />
 </p> 
 
 ## Features
