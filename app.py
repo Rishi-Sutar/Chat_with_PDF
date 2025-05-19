@@ -47,7 +47,7 @@ def get_pdf_chunk(docs):
     return text_chunks
 
 def get_vectorstore(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-exp-03-07", google_api_key=gemini_api_key)
     vector_store = FAISS.from_documents(text_chunks, embeddings)
     logging.info("Vectorstore created")
     return vector_store
