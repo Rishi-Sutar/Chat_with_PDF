@@ -19,6 +19,8 @@ import logging
 
 from src.htmlTemplates import css, bot_template, user_template
 
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
+
 # Load environment variables
 load_dotenv()
 gemini_api_key = st.secrets["google_api_key"]
