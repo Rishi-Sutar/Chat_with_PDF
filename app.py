@@ -55,9 +55,28 @@ def get_pdf_chunk(docs):
 
 def get_vectorstore(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
-    vector_store = FAISS.from_documents(text_chunks, embeddings)
+
+    MAX_CHARS = 4000  # Gemini limit-safe range
+
+    # Sanitize + truncate chunks
+    cleaned_chunks = []
+    for chunk in text_chunks:
+        content = chunk.page_content.strip()
+        if not content:
+            continue
+        if len(content) > MAX_CHARS:
+            logging.warning(f"Truncating long chunk ({len(content)} chars)")
+            content = content[:MAX_CHARS]
+        chunk.page_content = content
+        cleaned_chunks.append(chunk)
+
+    if not cleaned_chunks:
+        raise CustomException("No valid text chunks found for embedding.")
+
+    vector_store = FAISS.from_documents(cleaned_chunks, embeddings)
     logging.info("Vectorstore created")
     return vector_store
+
 
 def get_conversation_chain(vectorstore):
     llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
