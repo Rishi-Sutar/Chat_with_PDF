@@ -54,7 +54,7 @@ def get_pdf_chunk(docs):
 
 
 def get_vectorstore(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
+    embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004", google_api_key=google_api_key)
 
     MAX_CHARS = 4000  # Gemini limit-safe range
 
@@ -79,7 +79,7 @@ def get_vectorstore(text_chunks):
 
 
 def get_conversation_chain(vectorstore):
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",google_api_key=google_api_key)
     
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
