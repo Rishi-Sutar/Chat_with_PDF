@@ -54,7 +54,7 @@ def get_pdf_chunk(docs):
 
 
 def get_vectorstore(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="embedding-001", google_api_key=google_api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=google_api_key)
 
     MAX_CHARS = 4000  # Gemini limit-safe range
 
