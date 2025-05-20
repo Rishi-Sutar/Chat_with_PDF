@@ -37,7 +37,7 @@ def pdf_loader(uploaded_file):
         return docs
     except Exception as e:
         raise CustomException(e, sys)
-
+    
 def get_pdf_chunk(docs):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
@@ -45,8 +45,13 @@ def get_pdf_chunk(docs):
     )
     
     text_chunks = text_splitter.split_documents(docs)
-    logging.info("PDF splited into chunks")
+    
+    # Filter out empty or invalid chunks
+    text_chunks = [chunk for chunk in text_chunks if chunk.page_content and isinstance(chunk.page_content, str)]
+    
+    logging.info(f"PDF split into {len(text_chunks)} valid chunks")
     return text_chunks
+
 
 def get_vectorstore(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004", google_api_key=gemini_api_key)
