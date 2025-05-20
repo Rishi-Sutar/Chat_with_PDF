@@ -23,7 +23,7 @@ os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 
 # Load environment variables
 load_dotenv()
-gemini_api_key = st.secrets["google_api_key"]
+google_api_key = st.secrets["google_api_key"]
 
 def pdf_loader(uploaded_file):
     try:
@@ -54,13 +54,13 @@ def get_pdf_chunk(docs):
 
 
 def get_vectorstore(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004", google_api_key=gemini_api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
     vector_store = FAISS.from_documents(text_chunks, embeddings)
     logging.info("Vectorstore created")
     return vector_store
 
 def get_conversation_chain(vectorstore):
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=gemini_api_key)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
     
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
